@@ -1,52 +1,67 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
-      <div class="title-container">
+      <img src="../../assets/login/logo.png" alt="" class="logo">
+      <!-- 标题 -->
+      <!-- <div class="title-container">
         <h3 class="title">Login Form</h3>
-      </div>
-
+      </div> -->
+      <!-- 用户名输入框 -->
       <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
+        <span class="svg-container el-icon-mobile-phone" />
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
+          placeholder="请输入用户名"
           name="username"
           type="text"
           tabindex="1"
           auto-complete="on"
         />
       </el-form-item>
-
+      <!-- 密码输入框 -->
       <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
+        <span class="svg-container el-icon-lock" />
         <el-input
           :key="passwordType"
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="Password"
+          placeholder="请输入密码"
           name="password"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
         />
+        <!-- 显示隐藏密码 -->
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
+      <el-form-item prop="code">
+        <span class="svg-container el-icon-aim" />
+        <el-input
+          ref="code"
+          v-model="loginForm.code"
+          placeholder="请输入验证码"
+          name="code"
+          type="text"
+          tabindex="3"
+          auto-complete="on"
+        />
+      </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width:100%;margin-bottom:30px;"
+        @click.native.prevent="handleLogin"
+      >登录</el-button>
+    <!-- 小提示 -->
+      <!-- <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: any</span>
-      </div>
+      </div> -->
 
     </el-form>
   </div>
@@ -129,8 +144,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg:#fff;
+$light_gray:#eee;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -164,8 +179,8 @@ $cursor: #fff;
   }
 
   .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid $light_gray;
+    background:#fff ;
     border-radius: 5px;
     color: #454545;
   }
@@ -173,23 +188,36 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
+$bg:#fff;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
 .login-container {
+  position: relative;
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background: url(../../assets/login/bg.png) no-repeat;
   overflow: hidden;
 
   .login-form {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    transform: translate(-50%,-50%);
+    padding: 50px 35px 0;
     margin: 0 auto;
-    overflow: hidden;
+    background-color: $bg;
+    border-radius: 10px;
+    .logo{
+      position: absolute;
+      width: 96px;
+      height: 96px;
+      top:0;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
   }
 
   .tips {
