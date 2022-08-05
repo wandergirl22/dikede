@@ -3,11 +3,13 @@
  */
 
 /**
+ * 验证路径是否来自于外部
+ * mailto 电子邮件 tel 电话
  * @param {string} path
  * @returns {Boolean}
  */
 export function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
+  return /^(https?:|mailto:|tel:)/.test(path);
 }
 
 /**
@@ -15,6 +17,6 @@ export function isExternal(path) {
  * @returns {Boolean}
  */
 export function validUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+  const valid_map = ["admin", "editor"];
+  return valid_map.indexOf(str.trim()) >= 0;
 }
